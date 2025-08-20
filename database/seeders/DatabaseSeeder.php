@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +21,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             BrandSeeder::class,
             ProductSeeder::class, // Should be called after UserFactory, CategorySeeder and BrandSeeder
+            AttributeSeeder::class,
+            AttributeValueSeeder::class, // Call after AttributeSeeder
         ]);
     }
 }
