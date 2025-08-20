@@ -10,13 +10,16 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class CategoryResource extends Resource
 {
@@ -32,7 +35,23 @@ class CategoryResource extends Resource
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
+                    ->required()
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                Select::make('parent_id')
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->required()
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                        TextInput::make('slug'),
+                        Textarea::make('description')
+                            ->columnSpanFull(),
+                    ])
+                    ->searchable()
+                    ->preload()
+                    ->native(false)
+                    ->relationship('parent', 'name'),
                 TextInput::make('slug')
                     ->required(),
                 Textarea::make('description')
@@ -49,7 +68,7 @@ class CategoryResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('slug')
+                TextColumn::make('parent.name')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
