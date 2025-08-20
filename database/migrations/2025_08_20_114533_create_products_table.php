@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('sku')->unique();
+            $table->string('main_image'); // The url to the main image
             $table->text('description')->nullable();
 
             $table->foreignIdFor(Category::class)
