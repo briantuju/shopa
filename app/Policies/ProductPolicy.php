@@ -17,18 +17,6 @@ class ProductPolicy
      * allowing them to do anything with a product, or they are an ADMIN
      * */
 
-    //    /**
-    //     * Perform pre-authorization checks.
-    //     */
-    //    public function before(User $user, string $ability): ?bool
-    //    {
-    //        if ($user->hasExactRoles(Role::ADMIN->value)) {
-    //            return true;
-    //        }
-    //
-    //        return null;
-    //    }
-
     /**
      * Determine whether the user can view any models.
      */

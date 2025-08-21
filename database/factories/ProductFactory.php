@@ -26,7 +26,7 @@ class ProductFactory extends Factory
             'name' => $product_name,
             'slug' => str($product_name)->slug(),
             'sku' => fake()->ean13(),
-            'main_image' => fake()->imageUrl(),
+            'main_image' => 'https://dummyjson.com/image/600x400/282828?text=Product%20Image',
             'description' => fake()->paragraph(),
 
             'brand_id' => Brand::inRandomOrder()->first()?->id ?? null,
