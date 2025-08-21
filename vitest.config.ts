@@ -5,5 +5,8 @@ export default defineConfig({
         globals: true,
         environment: 'jsdom',
         setupFiles: './vitest.setup.mjs',
+        coverage: {
+            include: ['resources/js/**/*.{ts,tsx,js,jsx}'],
+        },
     },
 });
