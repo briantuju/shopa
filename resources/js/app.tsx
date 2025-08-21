@@ -1,5 +1,6 @@
 import '../css/app.css';
 
+import MainLayout from '@/layout/MainLayout';
 import { createInertiaApp } from '@inertiajs/react';
 import { MantineProvider } from '@mantine/core';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -19,7 +20,9 @@ createInertiaApp({
 
         root.render(
             <MantineProvider>
-                <App {...props} />
+                <MainLayout>
+                    <App {...props} />
+                </MainLayout>
             </MantineProvider>,
         );
     },
