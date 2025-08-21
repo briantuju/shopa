@@ -1,0 +1,1 @@
+- [ ] Update the attributes to show on the Product edit page
