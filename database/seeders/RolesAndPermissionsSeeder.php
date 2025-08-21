@@ -9,6 +9,7 @@ use App\Support\RolePermissions;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission as SpatiePermission;
 use Spatie\Permission\Models\Role as SpatieRole;
+use Spatie\Permission\PermissionRegistrar;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -21,6 +22,9 @@ class RolesAndPermissionsSeeder extends Seeder
          * This is a seeder that creates roles and permissions for the application.
          * More may be added as needed via the admin/seller panel
          * */
+
+        // Reset cached roles and permissions
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Create roles
         foreach (Role::cases() as $roleEnum) {

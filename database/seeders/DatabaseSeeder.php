@@ -12,6 +12,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        /*
+         * This MUST be called first, because it creates the default roles.
+         *
+         * Failing to do so will result in the user factory not working
+         * */
+        $this->call([
+            RolesAndPermissionsSeeder::class,
+        ]);
+
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
