@@ -11,15 +11,15 @@ enum Role: string
     /*
      * Admin role is reserved for the administrators only.
      * */
-    const ADMIN = 'ADMIN';
+    case ADMIN = 'ADMIN';
 
     /*
      * Vendor role is used for identifying vendors in the system.
      * */
-    const VENDOR = 'VENDOR';
+    case VENDOR = 'VENDOR';
 
     /*
      * The USER role is used for regular users.
      * */
-    const USER = 'USER';
+    case USER = 'USER';
 }
