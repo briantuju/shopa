@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\Role;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Throwable;
@@ -38,9 +39,11 @@ class ConfigureAdmin extends Command
         // create admin user
         $admin = User::where('email', $admin_email)->first();
         if ($admin) {
-            // TODO: $admin->role = UserRole::ADMIN->value;
             $admin->email_verified_at = now();
             $admin->save();
+
+            // sync the admin role
+            $admin->syncRoles(Role::ADMIN->value);
 
             $this->info('✔ Admin user configured successfully');
         } else {
