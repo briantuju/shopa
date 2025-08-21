@@ -2,12 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Enums\Role;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
@@ -40,5 +42,25 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    /**
+     * Indicate that the user should have a specific role.
+     */
+    public function asUser(Role $role): static
+    {
+        // Sync the role after creating the user
+        return $this->state(fn (array $attributes) => $attributes)
+            ->afterCreating(function (User $user) use ($role) {
+                $user->assignRole($role->value);
+            });
+    }
+
+    public function configure(): static
+    {
+        // We want the USER role to be assigned after creating the user
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(Role::USER->value);
+        });
     }
 }

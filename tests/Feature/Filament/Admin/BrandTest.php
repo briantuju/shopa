@@ -1,12 +1,13 @@
 <?php
 
+use App\Enums\Role;
 use App\Filament\Resources\Brands\BrandResource;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;
 
 beforeEach(function () {
-    $admin = User::factory()->create([
+    $admin = User::factory()->asUser(Role::ADMIN)->create([
         'email' => config('customconfig.app.admin_email'),
     ]);
 
