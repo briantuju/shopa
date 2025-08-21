@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Policies\ProductPolicy;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Database\Factories\ProductFactory;
+use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+#[UsePolicy(ProductPolicy::class)]
 class Product extends Model
 {
     /** @use HasFactory<ProductFactory> */

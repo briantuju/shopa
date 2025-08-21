@@ -1,0 +1,92 @@
+<?php
+
+namespace App\Policies;
+
+use App\Enums\Permission;
+use App\Enums\Resource;
+use App\Models\ProductVariant;
+use App\Models\User;
+
+class ProductVariantPolicy
+{
+    /*
+     * !!! IMPORTANT !!!
+     *
+     * We do not explicitly check for the user's role here.
+     * Always make sure that the user is logged in as a VENDOR before
+     * allowing them to do anything with a product, or they are an ADMIN
+     * */
+
+    //    /**
+    //     * Perform pre-authorization checks.
+    //     */
+    //    public function before(User $user, string $ability): ?bool
+    //    {
+    //        if ($user->hasExactRoles(Role::ADMIN->value)) {
+    //            return true;
+    //        }
+    //
+    //        return null;
+    //    }
+
+    /**
+     * Determine whether the user can view any models.
+     */
+    public function viewAny(User $user): bool
+    {
+        return $user->can(Permission::VIEW->value.' '.Resource::PRODUCT_VARIANT->value);
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view(User $user, ProductVariant $productVariant): bool
+    {
+        return $user->can(Permission::VIEW->value.' '.Resource::PRODUCT_VARIANT->value)
+            && $productVariant->product->user_id === $user->id;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create(User $user): bool
+    {
+        return $user->can(Permission::CREATE->value.' '.Resource::PRODUCT_VARIANT->value);
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     */
+    public function update(User $user, ProductVariant $productVariant): bool
+    {
+        return $user->can(Permission::UPDATE->value.' '.Resource::PRODUCT_VARIANT->value)
+            && $productVariant->product->user_id === $user->id;
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user, ProductVariant $productVariant): bool
+    {
+        return $user->can(Permission::DELETE->value.' '.Resource::PRODUCT_VARIANT->value)
+            && $productVariant->product->user_id === $user->id;
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(User $user, ProductVariant $productVariant): bool
+    {
+        return $user->can(Permission::CREATE->value.' '.Resource::PRODUCT_VARIANT->value)
+            && $productVariant->product->user_id === $user->id;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, ProductVariant $productVariant): bool
+    {
+        return $user->can(Permission::CREATE->value.' '.Resource::PRODUCT_VARIANT->value)
+            && $productVariant->product->user_id === $user->id;
+    }
+}

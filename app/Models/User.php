@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\Role;
 use Database\Factories\UserFactory;
 use Exception;
 use Filament\Models\Contracts\FilamentUser;
@@ -68,8 +69,29 @@ class User extends Authenticatable implements FilamentUser
     {
         if ($panel->getId() === 'admin') {
             return $this->email === config('customconfig.app.admin_email') && $this->hasVerifiedEmail();
+        } elseif ($panel->getId() === 'vendor') {
+            // return $this->role === Role::VENDOR->value && $this->hasVerifiedEmail();
+            return true;
         }
 
         return true;
+    }
+
+    /** Check if the user is an admin */
+    public function isAdmin(): bool
+    {
+        return $this->role === Role::ADMIN->value;
+    }
+
+    /** Check if the user is a vendor */
+    public function isVendor(): bool
+    {
+        return $this->role === Role::VENDOR->value;
+    }
+
+    /** Check if the user is a client */
+    public function isClient(): bool
+    {
+        return $this->role === Role::USER->value;
     }
 }
