@@ -4,9 +4,8 @@ export interface Auth {
     user: User;
 }
 
-export interface SharedData {
+export interface InertiaSharedData {
     name: string;
-    quote: { message: string; author: string };
     auth: Auth;
     ziggy: Config & { location: string };
     [key: string]: unknown;
