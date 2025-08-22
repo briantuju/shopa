@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -7,6 +8,12 @@ export default defineConfig({
         setupFiles: './vitest.setup.mjs',
         coverage: {
             include: ['resources/js/**/*.{ts,tsx,js,jsx}'],
+        },
+    },
+    resolve: {
+        alias: {
+            'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
+            '@': resolve(__dirname, 'resources/js'),
         },
     },
 });

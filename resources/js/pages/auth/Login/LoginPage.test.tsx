@@ -1,5 +1,5 @@
+import { render, screen } from '@/test-utils';
 import { describe, expect, it } from 'vitest';
-import { render, screen } from '../../../test-utils/index';
 import LoginPage from './LoginPage';
 
 describe('Signup component', () => {

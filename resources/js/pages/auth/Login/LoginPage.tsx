@@ -1,9 +1,10 @@
+import { useZiggyRoute } from '@/hooks/useZiggyRoute';
 import { Link, useForm } from '@inertiajs/react';
 import { Button, Card, PasswordInput, SimpleGrid, TextInput, Title } from '@mantine/core';
 import { ChangeEvent, FormEvent } from 'react';
-import { route } from 'ziggy-js';
 
 export default function LoginPage() {
+    const route = useZiggyRoute();
     const { data, setData, post, processing, errors } = useForm({
         email: '',
         password: '',
