@@ -26,6 +26,10 @@ Route::middleware('auth')
     ->prefix('auth')
     ->as('auth.')
     ->group(function () {
-        //        Route::post('/logout', [LoginController::class, 'destroy'])
-        //            ->name('logout');
+        //        Route::get('/me', function () {
+        //            return response()->json(auth()->user());
+        //        })->name('me');
+
+        Route::post('/logout', [LoginController::class, 'logout'])
+            ->name('logout');
     });

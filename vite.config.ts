@@ -1,8 +1,29 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import { exec } from 'child_process';
 import laravel from 'laravel-vite-plugin';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
+
+const ziggyWatcher = () => {
+    return {
+        name: 'ziggy-watcher',
+        buildStart() {
+            exec('php artisan ziggy:generate', (err, stdout, stderr) => {
+                if (err) console.error(stderr);
+                else console.log(stdout);
+            });
+        },
+        handleHotUpdate({ file }: { file: string }) {
+            if (file.includes('/routes/')) {
+                exec('php artisan ziggy:generate', (err, stdout, stderr) => {
+                    if (err) console.error(stderr);
+                    else console.log(stdout);
+                });
+            }
+        },
+    };
+};
 
 export default defineConfig({
     plugins: [
@@ -13,6 +34,7 @@ export default defineConfig({
         }),
         react(),
         tailwindcss(),
+        ziggyWatcher(),
     ],
     esbuild: {
         jsx: 'automatic',
