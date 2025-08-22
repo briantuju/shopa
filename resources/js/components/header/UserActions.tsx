@@ -1,8 +1,22 @@
-import { Link } from '@inertiajs/react';
+import { useAppContext } from '@/context/app';
+import { useZiggyRoute } from '@/hooks/useZiggyRoute';
+import { Link, router } from '@inertiajs/react';
 import { Menu, UnstyledButton } from '@mantine/core';
+import { useState } from 'react';
 import { HiOutlineHeart, HiOutlineShoppingCart, HiOutlineUser } from 'react-icons/hi2';
 
 const UserActions = () => {
+    const [loading, setLoading] = useState(false);
+    const route = useZiggyRoute();
+    const app = useAppContext();
+
+    const handleLogout = () => {
+        router.post(route('auth.logout'), undefined, {
+            onStart: () => setLoading(true),
+            onFinish: () => setLoading(false),
+        });
+    };
+
     return (
         <div className="flex items-center gap-4">
             <Link href="/public" className="relative">
@@ -28,12 +42,22 @@ const UserActions = () => {
                 </Menu.Target>
 
                 <Menu.Dropdown>
-                    <Menu.Item component={Link} href={route('auth.login-page')}>
-                        Login
-                    </Menu.Item>
-                    <Menu.Item component={Link} href={route('auth.signup-page')}>
-                        Signup
-                    </Menu.Item>
+                    {app.user ? (
+                        <>
+                            <Menu.Item onClick={handleLogout} color="red" disabled={loading}>
+                                Logout
+                            </Menu.Item>
+                        </>
+                    ) : (
+                        <>
+                            <Menu.Item component={Link} href={route('auth.login-page')}>
+                                Login
+                            </Menu.Item>
+                            <Menu.Item component={Link} href={route('auth.signup-page')}>
+                                Signup
+                            </Menu.Item>
+                        </>
+                    )}
                 </Menu.Dropdown>
             </Menu>
         </div>

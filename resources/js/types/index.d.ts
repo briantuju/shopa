@@ -4,7 +4,14 @@ export interface Auth {
     user: User;
 }
 
-export interface InertiaSharedData {
+interface Flash {
+    flash_message?: string;
+    flash_error?: string;
+    flash_success?: string;
+    flash_title?: string;
+}
+
+export interface InertiaSharedData extends Flash {
     name: string;
     auth: Auth;
     ziggy: Config & { location: string };
