@@ -25,7 +25,7 @@ export default function ForgotPasswordPage() {
                     No problem at all, just let us know your email and we will send you a password reset link.
                 </Text>
 
-                <form onSubmit={handleSubmit} data-testid="forgot-password-form" className="grid place-items-center">
+                <form onSubmit={handleSubmit} role="form" className="grid place-items-center">
                     <TextInput
                         aria-label="Email"
                         type="email"

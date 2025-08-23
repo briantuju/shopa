@@ -1,7 +1,6 @@
 import { mockPost, mockSetData, setUseFormInitialData } from '@/../../vitest.setup.mjs';
 import { useZiggyRoute } from '@/hooks/useZiggyRoute';
 import { fireEvent, render, screen } from '@/test-utils';
-import { describe, expect, it } from 'vitest';
 import SignupPage from './SignupPage';
 
 describe('SignupPage', () => {
