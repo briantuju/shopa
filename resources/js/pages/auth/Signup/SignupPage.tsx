@@ -28,7 +28,7 @@ export default function SignupPage() {
     };
 
     return (
-        <form onSubmit={submit} className="mx-auto flex max-w-3xl flex-col gap-4 p-8 lg:gap-6">
+        <form role="form" onSubmit={submit} className="mx-auto flex max-w-3xl flex-col gap-4 p-8 lg:gap-6">
             <Title order={1} ta="center" size={24}>
                 Get Started
             </Title>

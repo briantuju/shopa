@@ -24,8 +24,9 @@ vi.mock('@inertiajs/react', async (importOriginal) => {
 describe('ResetPassword page', () => {
     const route = useZiggyRoute();
 
-    it('renders inputs and button', () => {
+    it('renders heading, inputs and button', () => {
         render(<ResetPasswordPage token="abc123" email="test@example.com" />);
+        expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
         expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/new password/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/confirm password/i)).toBeInTheDocument();
