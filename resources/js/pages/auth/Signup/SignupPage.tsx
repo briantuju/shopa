@@ -1,6 +1,6 @@
 import { useZiggyRoute } from '@/hooks/useZiggyRoute';
 import { Link, useForm } from '@inertiajs/react';
-import { Button, Card, Group, PasswordInput, SimpleGrid, TextInput, Title } from '@mantine/core';
+import { Box, Button, Card, Group, PasswordInput, SimpleGrid, Text, TextInput, Title } from '@mantine/core';
 import { ChangeEvent, FormEvent } from 'react';
 import { HiOutlineUser } from 'react-icons/hi2';
 import { IoArrowForwardOutline, IoLockClosedOutline, IoMailOutline } from 'react-icons/io5';
@@ -32,6 +32,17 @@ export default function SignupPage() {
             <Title order={1} ta="center" size={24}>
                 Get Started
             </Title>
+
+            <Box className="grid place-items-center">
+                <Text>Want to sell your products online?</Text>
+
+                <Text>
+                    <Link href={route('auth.vendor-signup-page')} className="text-blue-500">
+                        Sign up as a vendor{' '}
+                    </Link>
+                    and start selling your products today!
+                </Text>
+            </Box>
 
             <Card withBorder radius="md" padding="lg" shadow="md">
                 <SimpleGrid spacing="md" cols={{ base: 1, sm: 2 }} mb={30}>

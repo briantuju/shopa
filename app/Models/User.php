@@ -12,8 +12,10 @@ use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use SensitiveParameter;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
@@ -63,7 +65,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         $this->notify(new QueuedVerifyEmail);
     }
 
-    public function sendPasswordResetNotification(#[\SensitiveParameter] $token): void
+    public function sendPasswordResetNotification(#[SensitiveParameter] $token): void
     {
         $this->notify(new QueuedResetPassword($token));
     }
@@ -72,6 +74,12 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    /** Get the vendor profile for this User */
+    public function vendor(): HasOne
+    {
+        return $this->hasOne(Vendor::class);
     }
 
     /**

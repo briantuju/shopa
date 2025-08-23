@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SignupController;
+use App\Http\Controllers\Auth\VendorSignupController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')
@@ -14,8 +15,14 @@ Route::middleware('guest')
         Route::inertia('/signup', 'auth/Signup/SignupPage')
             ->name('signup-page');
 
+        Route::get('/signup/vendor', [VendorSignupController::class, 'showPage'])
+            ->name('vendor-signup-page');
+
         Route::post('/signup', [SignupController::class, 'signup'])
             ->name('signup');
+
+        Route::post('/signup/vendor', [VendorSignupController::class, 'signup'])
+            ->name('vendor-signup');
 
         Route::inertia('/login', 'auth/Login/LoginPage')
             ->name('login-page');
