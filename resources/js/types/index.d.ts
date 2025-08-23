@@ -5,10 +5,12 @@ export interface Auth {
 }
 
 interface Flash {
-    flash_message?: string;
-    flash_error?: string;
-    flash_success?: string;
-    flash_title?: string;
+    flash: {
+        message?: string;
+        error?: string;
+        success?: string;
+        title?: string;
+    };
 }
 
 export interface InertiaSharedData extends Flash {

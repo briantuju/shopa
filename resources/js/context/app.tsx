@@ -16,26 +16,26 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         setUser(props.auth.user);
 
-        if (props?.flash_message) {
+        if (props?.flash.message) {
             notifications.show({
-                title: props.flash_title || 'Info',
-                message: props.flash_message,
+                title: props.flash.title || 'Info',
+                message: props.flash.message,
                 color: 'blue',
             });
         }
 
-        if (props?.flash_success) {
+        if (props?.flash.success) {
             notifications.show({
-                title: props.flash_title || 'Success',
-                message: props.flash_success,
+                title: props.flash.title || 'Success',
+                message: props.flash.success,
                 color: 'green',
             });
         }
 
-        if (props?.flash_error) {
+        if (props?.flash.error) {
             notifications.show({
-                title: props.flash_title || 'Error',
-                message: props.flash_error,
+                title: props.flash.title || 'Error',
+                message: props.flash.error,
                 color: 'red',
             });
         }
