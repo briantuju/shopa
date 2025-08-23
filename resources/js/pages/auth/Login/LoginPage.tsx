@@ -57,7 +57,7 @@ export default function LoginPage() {
                         error={errors.password}
                     />
 
-                    <Link href={route('home')} className="text-sm text-blue-500">
+                    <Link href={route('password.request')} className="text-sm text-blue-500">
                         I have forgot my password
                     </Link>
                 </SimpleGrid>

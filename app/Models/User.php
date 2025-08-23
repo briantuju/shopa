@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Role;
+use App\Notifications\Auth\QueuedResetPassword;
 use App\Notifications\Auth\QueuedVerifyEmail;
 use Database\Factories\UserFactory;
 use Exception;
@@ -60,6 +61,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     public function sendEmailVerificationNotification(): void
     {
         $this->notify(new QueuedVerifyEmail);
+    }
+
+    public function sendPasswordResetNotification(#[\SensitiveParameter] $token): void
+    {
+        $this->notify(new QueuedResetPassword($token));
     }
 
     /** Get the products created by this User */

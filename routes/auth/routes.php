@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SignupController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +39,23 @@ Route::middleware('auth')
             ->middleware('throttle:3,60') // 3 emails per hour
             ->name('send');
     });
+
+// Handle password reset
+Route::inertia('/forgot-password', 'auth/Password/ForgotPasswordPage')
+    ->middleware('guest')
+    ->name('password.request');
+
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetEmail'])
+    ->middleware(['guest', 'throttle:5,60']) // 5 emails per hour
+    ->name('password.email');
+
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetPage'])
+    ->middleware('guest')
+    ->name('password.reset');
+
+Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])
+    ->middleware('guest')
+    ->name('password.update');
 
 Route::middleware('auth')
     ->prefix('auth')
