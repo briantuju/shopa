@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class, // Should be called after UserFactory, CategorySeeder and BrandSeeder
             AttributeSeeder::class,
             AttributeValueSeeder::class, // Call after AttributeSeeder
+            VendorSeeder::class,
         ]);
     }
 }
