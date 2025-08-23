@@ -25,7 +25,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_or_permission' => RoleOrPermissionMiddleware::class,
         ]);
 
+        // Handle guests
         $middleware->redirectGuestsTo(fn () => route('auth.login-page'));
+
+        // Configure trusted hosts
+        $middleware->trustHosts(at: fn () => config('customconfig.app.trusted_hosts'));
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
