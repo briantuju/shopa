@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\SessionFlash;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -43,10 +44,10 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'flash' => fn () => [
-                'message' => session('flash_message'),
-                'success' => session('flash_success'),
-                'error' => session('flash_error'),
-                'title' => session('flash_title'),
+                'message' => session(SessionFlash::FLASH_MESSAGE),
+                'success' => session(SessionFlash::FLASH_SUCCESS),
+                'error' => session(SessionFlash::FLASH_ERROR),
+                'title' => session(SessionFlash::FLASH_TITLE),
             ],
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),

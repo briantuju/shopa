@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\SessionFlash;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,17 +14,16 @@ class LoginController extends Controller
     /**
      * Handle an authentication attempt.
      */
-    public function authenticate(Request $request): RedirectResponse
+    public function authenticate(LoginRequest $request): RedirectResponse
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $credentials = $request->validated();
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('home');
+            return redirect()
+                ->intended(route('home'))
+                ->with(SessionFlash::FLASH_SUCCESS, 'You have successfully logged in');
         }
 
         return back()->withErrors([
@@ -38,6 +39,7 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect(route('home'));
+        return redirect(route('home'))
+            ->with(SessionFlash::FLASH_SUCCESS, 'You have been logged out!');
     }
 }

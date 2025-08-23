@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Enums\Role;
+use App\Enums\SessionFlash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\SignupRequest;
 use App\Models\User;
@@ -32,7 +33,7 @@ class SignupController extends Controller
         Auth::loginUsingId($user->id);
 
         return redirect(route('home'))->with([
-            'flash_success' => 'Thank you for signing up to Shopa',
+            SessionFlash::FLASH_SUCCESS => 'Thank you for signing up to Shopa',
         ]);
     }
 }
