@@ -7,6 +7,7 @@ use App\Enums\SessionFlash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\SignupRequest;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -25,15 +26,20 @@ class SignupController extends Controller
 
         $user = User::create($data);
 
+        // Set the default user role
         $user->syncRoles(Role::USER->value);
+
+        // Trigger user registered event
+        event(new Registered($user));
 
         DB::commit();
 
         // Login the user
         Auth::loginUsingId($user->id);
 
-        return redirect(route('home'))->with([
-            SessionFlash::FLASH_SUCCESS => 'Thank you for signing up to Shopa',
-        ]);
+        return redirect(route('me'))
+            ->with([
+                SessionFlash::FLASH_SUCCESS => 'Thank you for signing up to Shopa',
+            ]);
     }
 }
