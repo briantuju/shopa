@@ -31,7 +31,7 @@ export default function ForgotPasswordPage() {
                         type="email"
                         placeholder="you@example.com"
                         required
-                        value={data.email}
+                        defaultValue={data.email}
                         onChange={(e) => setData('email', e.currentTarget.value)}
                         error={errors.email}
                     />

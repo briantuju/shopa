@@ -25,14 +25,14 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
 
     return (
         <Paper withBorder shadow="md" p="xl" radius="md" className="mx-auto mt-20 max-w-md">
-            <Title order={2} className="mb-6 text-center">
-                Reset Password
+            <Title order={1} ta="center" mb={10} size={24}>
+                Reset password
             </Title>
 
             <form onSubmit={handleSubmit} role="form" data-testid="reset-password-form">
                 <TextInput
                     label="Email"
-                    value={data.email}
+                    defaultValue={data.email}
                     onChange={(e) => setData('email', e.currentTarget.value)}
                     error={errors.email}
                     required
@@ -42,7 +42,6 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
 
                 <PasswordInput
                     label="New Password"
-                    value={data.password}
                     onChange={(e) => setData('password', e.currentTarget.value)}
                     error={errors.password}
                     required
@@ -51,7 +50,6 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
 
                 <PasswordInput
                     label="Confirm Password"
-                    value={data.password_confirmation}
                     onChange={(e) => setData('password_confirmation', e.currentTarget.value)}
                     error={errors.password_confirmation}
                     required

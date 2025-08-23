@@ -40,7 +40,7 @@ export default function LoginPage() {
                         withAsterisk
                         required
                         leftSection={<IoMailOutline />}
-                        value={data.email}
+                        defaultValue={data.email}
                         onChange={handleChange}
                         error={errors.email}
                     />
@@ -52,7 +52,6 @@ export default function LoginPage() {
                         withAsterisk
                         required
                         leftSection={<IoLockClosedOutline />}
-                        value={data.password}
                         onChange={handleChange}
                         error={errors.password}
                     />

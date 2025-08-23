@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\SessionFlash;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
@@ -47,7 +48,7 @@ class ResetPasswordController extends Controller
         return $status === Password::PasswordReset
             ? redirect()
                 ->route('auth.login-page')
-                ->with('status', __($status))
+                ->with(SessionFlash::FLASH_MESSAGE, __($status))
             : back()
                 ->withErrors(['email' => [__($status)]]);
     }

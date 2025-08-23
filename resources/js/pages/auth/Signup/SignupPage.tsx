@@ -43,7 +43,7 @@ export default function SignupPage() {
                         withAsterisk
                         required
                         leftSection={<HiOutlineUser />}
-                        value={data.name}
+                        defaultValue={data.name}
                         onChange={handleChange}
                         error={errors.name}
                     />
@@ -56,7 +56,7 @@ export default function SignupPage() {
                         withAsterisk
                         required
                         leftSection={<IoMailOutline />}
-                        value={data.email}
+                        defaultValue={data.email}
                         onChange={handleChange}
                         error={errors.email}
                     />
@@ -68,7 +68,6 @@ export default function SignupPage() {
                         withAsterisk
                         required
                         leftSection={<IoLockClosedOutline />}
-                        value={data.password}
                         onChange={handleChange}
                         error={errors.password}
                     />
@@ -80,7 +79,6 @@ export default function SignupPage() {
                         withAsterisk
                         required
                         leftSection={<IoLockClosedOutline />}
-                        value={data.password_confirmation}
                         onChange={handleChange}
                         error={errors.password_confirmation}
                     />

@@ -18,7 +18,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
         if (props?.flash.message) {
             notifications.show({
-                title: props.flash.title || 'Info',
+                title: props.flash.title || '',
                 message: props.flash.message,
                 color: 'blue',
             });
@@ -26,7 +26,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
         if (props?.flash.success) {
             notifications.show({
-                title: props.flash.title || 'Success',
+                title: props.flash.title || '',
                 message: props.flash.success,
                 color: 'green',
             });
@@ -34,7 +34,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
         if (props?.flash.error) {
             notifications.show({
-                title: props.flash.title || 'Error',
+                title: props.flash.title || '',
                 message: props.flash.error,
                 color: 'red',
             });
