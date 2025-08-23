@@ -1,7 +1,8 @@
 import { useZiggyRoute } from '@/hooks/useZiggyRoute';
 import { Link, useForm } from '@inertiajs/react';
-import { Button, Card, PasswordInput, SimpleGrid, TextInput, Title } from '@mantine/core';
+import { Button, Card, Group, PasswordInput, SimpleGrid, TextInput, Title } from '@mantine/core';
 import { ChangeEvent, FormEvent } from 'react';
+import { IoArrowForwardOutline, IoLockClosedOutline, IoMailOutline } from 'react-icons/io5';
 
 export default function LoginPage() {
     const route = useZiggyRoute();
@@ -38,6 +39,7 @@ export default function LoginPage() {
                         type="email"
                         withAsterisk
                         required
+                        leftSection={<IoMailOutline />}
                         value={data.email}
                         onChange={handleChange}
                         error={errors.email}
@@ -49,17 +51,26 @@ export default function LoginPage() {
                         type="password"
                         withAsterisk
                         required
+                        leftSection={<IoLockClosedOutline />}
                         value={data.password}
                         onChange={handleChange}
                         error={errors.password}
                     />
+
+                    <Link href={route('home')} className="text-sm text-blue-500">
+                        I have forgot my password
+                    </Link>
                 </SimpleGrid>
 
-                <Button type="submit" className="mb-4 max-w-max" loading={processing}>
-                    Login
-                </Button>
+                <Group justify="space-between" align="center">
+                    <Button type="submit" className="max-w-max" loading={processing} rightSection={<IoArrowForwardOutline />}>
+                        Login
+                    </Button>
 
-                <Link href={route('auth.signup-page')}>Create an account</Link>
+                    <Link href={route('auth.signup-page')} className="text-blue-500">
+                        Create an account
+                    </Link>
+                </Group>
             </Card>
         </form>
     );

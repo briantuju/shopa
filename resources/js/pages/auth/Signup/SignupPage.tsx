@@ -2,6 +2,8 @@ import { useZiggyRoute } from '@/hooks/useZiggyRoute';
 import { Link, useForm } from '@inertiajs/react';
 import { Button, Card, Group, PasswordInput, SimpleGrid, TextInput, Title } from '@mantine/core';
 import { ChangeEvent, FormEvent } from 'react';
+import { HiOutlineUser } from 'react-icons/hi2';
+import { IoArrowForwardOutline, IoLockClosedOutline, IoMailOutline } from 'react-icons/io5';
 
 export default function SignupPage() {
     const route = useZiggyRoute();
@@ -40,6 +42,7 @@ export default function SignupPage() {
                         type="text"
                         withAsterisk
                         required
+                        leftSection={<HiOutlineUser />}
                         value={data.name}
                         onChange={handleChange}
                         error={errors.name}
@@ -52,6 +55,7 @@ export default function SignupPage() {
                         type="email"
                         withAsterisk
                         required
+                        leftSection={<IoMailOutline />}
                         value={data.email}
                         onChange={handleChange}
                         error={errors.email}
@@ -63,6 +67,7 @@ export default function SignupPage() {
                         type="password"
                         withAsterisk
                         required
+                        leftSection={<IoLockClosedOutline />}
                         value={data.password}
                         onChange={handleChange}
                         error={errors.password}
@@ -74,6 +79,7 @@ export default function SignupPage() {
                         type="password"
                         withAsterisk
                         required
+                        leftSection={<IoLockClosedOutline />}
                         value={data.password_confirmation}
                         onChange={handleChange}
                         error={errors.password_confirmation}
@@ -81,11 +87,13 @@ export default function SignupPage() {
                 </SimpleGrid>
 
                 <Group justify="space-between">
-                    <Button type="submit" className="max-w-max" loading={processing}>
+                    <Button type="submit" className="max-w-max" loading={processing} rightSection={<IoArrowForwardOutline />}>
                         Signup
                     </Button>
 
-                    <Link href={route('auth.login-page')}>Already have an account? Login</Link>
+                    <Link href={route('auth.login-page')} className="text-blue-500">
+                        Already have an account? <b>Login</b>{' '}
+                    </Link>
                 </Group>
             </Card>
         </form>
