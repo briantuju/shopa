@@ -56,7 +56,7 @@ class VendorSignupController extends Controller
         // Login the user
         Auth::loginUsingId($user->id);
 
-        return redirect(route('me'))
+        return redirect(route('home'))
             ->with([
                 SessionFlash::FLASH_TITLE => 'Account Created Successfully',
                 SessionFlash::FLASH_SUCCESS => 'Thank you for signing up to Shopa. Verify your email to get started.',
