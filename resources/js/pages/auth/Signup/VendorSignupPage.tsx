@@ -9,13 +9,13 @@ import { HiOutlineUser } from 'react-icons/hi2';
 import { IoLocationOutline, IoLockClosedOutline, IoMailOutline } from 'react-icons/io5';
 
 export default function VendorSignupPage() {
+    const [active, setActive] = useState(0);
+    const route = useZiggyRoute();
     const props = usePage<
         InertiaSharedData & {
             business_types: string[];
         }
     >().props;
-    const route = useZiggyRoute();
-    const [active, setActive] = useState(0);
 
     const { data, errors, post, processing, setData, setError, clearErrors } = useForm({
         name: '', // contact person
@@ -133,6 +133,10 @@ export default function VendorSignupPage() {
 
     return (
         <div>
+            <Title order={1} ta="center" my="xl" size={24}>
+                Start selling on Shopa
+            </Title>
+
             <form onSubmit={handleSubmit} role="form" className="mx-auto flex max-w-4xl flex-col gap-4 p-8 lg:gap-6">
                 <Stepper active={active}>
                     <Stepper.Step label="Personal Information" description="Enter your personal information here">

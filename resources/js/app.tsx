@@ -3,9 +3,21 @@ import '../css/app.css';
 import MainLayout from '@/layout/MainLayout';
 import Providers from '@/providers';
 import { createInertiaApp } from '@inertiajs/react';
+import { configureEcho } from '@laravel/echo-react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ComponentType, ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
+
+configureEcho({
+    broadcaster: 'pusher',
+    key: import.meta.env.VITE_PUSHER_APP_KEY,
+    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+    forceTLS: true,
+    wsHost: import.meta.env.VITE_PUSHER_HOST,
+    wsPort: import.meta.env.VITE_PUSHER_PORT,
+    wssPort: import.meta.env.VITE_PUSHER_PORT,
+    enabledTransports: ['ws', 'wss'],
+});
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
