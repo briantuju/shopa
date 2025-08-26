@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Actions\GetAdminUser;
+use App\Actions\Auth\SendVendorCreatedNotification;
 use App\Enums\BusinessType;
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\VendorSignupRequest;
 use App\Models\User;
-use Filament\Notifications\Notification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -54,15 +53,7 @@ class VendorSignupController extends Controller
 
         DB::commit();
 
-        // Notify admin
-        $recipient = GetAdminUser::run();
-
-        Notification::make()
-            ->title('Vendor Signup')
-            // TODO: Add a direct link in the notification to view the vendor
-            ->body('A new vendor has signed up to Shopa.')
-            ->broadcast($recipient)
-            ->sendToDatabase($recipient);
+        SendVendorCreatedNotification::run($user->vendor);
 
         // Login the user
         Auth::loginUsingId($user->id);
