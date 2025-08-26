@@ -40,7 +40,7 @@ class Vendor extends Model
     {
         return [
             'business_type' => BusinessType::class,
-            'state' => VendorStatus::class,
+            'status' => VendorStatus::class,
         ];
     }
 

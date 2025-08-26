@@ -9,6 +9,7 @@ use App\Filament\Resources\Vendors\Schemas\VendorForm;
 use App\Filament\Resources\Vendors\Tables\VendorsTable;
 use App\Models\Vendor;
 use BackedEnum;
+use Exception;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -20,11 +21,17 @@ class VendorResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::UserGroup;
 
+    /**
+     * @throws Exception
+     */
     public static function form(Schema $schema): Schema
     {
         return VendorForm::configure($schema);
     }
 
+    /**
+     * @throws Exception
+     */
     public static function table(Table $table): Table
     {
         return VendorsTable::configure($table);

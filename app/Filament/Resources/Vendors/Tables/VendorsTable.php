@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Vendors\Tables;
 
+use App\Enums\VendorStatus;
+use Exception;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -12,6 +14,9 @@ use Filament\Tables\Table;
 
 class VendorsTable
 {
+    /**
+     * @throws Exception
+     */
     public static function configure(Table $table): Table
     {
         return $table
@@ -21,11 +26,13 @@ class VendorsTable
                 TextColumn::make('business_name')->searchable()->sortable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->colors([
-                        'warning' => 'PENDING',
-                        'success' => 'APPROVED',
-                        'danger' => 'REJECTED',
-                    ]),
+                    ->colors(fn (VendorStatus $state) => match ($state->value) {
+                        'APPROVED' => ['success'],
+                        'PENDING' => ['gray'],
+                        'REJECTED' => ['warning'],
+                        'SUSPENDED' => ['danger'],
+                        default => ['primary'],
+                    }),
                 TextColumn::make('user.name')->label('Owner'),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -38,7 +45,7 @@ class VendorsTable
             ])
             ->filters([
                 SelectFilter::make('status')
-                    ->options(\App\Enums\VendorStatus::array()),
+                    ->options(VendorStatus::class),
             ])
             ->recordActions([
                 EditAction::make(),

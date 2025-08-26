@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\Vendors\Schemas;
 
 use App\Enums\BusinessType;
-use App\Enums\Role;
 use App\Enums\VendorStatus;
 use App\Models\User;
+use Exception;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -16,6 +16,9 @@ use Filament\Schemas\Schema;
 
 class VendorForm
 {
+    /**
+     * @throws Exception
+     */
     public static function configure(Schema $schema): Schema
     {
         return $schema
