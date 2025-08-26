@@ -16,6 +16,7 @@ interface Flash {
 export interface InertiaSharedData extends Flash {
     name: string;
     auth: Auth;
+    is_vendor: boolean;
     ziggy: Config & { location: string };
     [key: string]: unknown;
 }

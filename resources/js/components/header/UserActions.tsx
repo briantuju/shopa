@@ -19,11 +19,11 @@ const UserActions = () => {
 
     return (
         <div className="flex items-center gap-4">
-            <Link href="/public" className="relative">
+            <Link href={route('home')} className="relative">
                 <HiOutlineHeart className="h-6 w-6 text-gray-600 hover:text-blue-600" />
             </Link>
 
-            <Link href="/public" className="relative">
+            <Link href={route('home')} className="relative">
                 <HiOutlineShoppingCart className="h-6 w-6 text-gray-600 hover:text-blue-600" />
                 <span className="absolute -top-2 -right-2 rounded-full bg-blue-600 px-1.5 text-xs text-white">2</span>
             </Link>
@@ -44,6 +44,9 @@ const UserActions = () => {
                 <Menu.Dropdown>
                     {app.user ? (
                         <>
+                            <Menu.Item component={Link} href={route('me')}>
+                                Account
+                            </Menu.Item>
                             <Menu.Item onClick={handleLogout} color="red" disabled={loading}>
                                 Logout
                             </Menu.Item>

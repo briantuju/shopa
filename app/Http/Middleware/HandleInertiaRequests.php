@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\Role;
 use App\Enums\SessionFlash;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -43,6 +44,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'is_vendor' => $request->user()?->hasAnyRole(Role::VENDOR->value),
             'flash' => fn () => [
                 'message' => session(SessionFlash::FLASH_MESSAGE),
                 'success' => session(SessionFlash::FLASH_SUCCESS),

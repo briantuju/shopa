@@ -1,5 +1,6 @@
 import { useZiggyRoute } from '@/hooks/useZiggyRoute';
-import { Link } from '@inertiajs/react';
+import { InertiaSharedData } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
 import { Button } from '@mantine/core';
 
 interface NavMenuProps {
@@ -8,12 +9,13 @@ interface NavMenuProps {
 
 const NavMenu = ({ vertical = false }: NavMenuProps) => {
     const route = useZiggyRoute();
+    const { is_vendor } = usePage<InertiaSharedData>().props;
 
     const navItems = [
         { label: 'Shop', path: '/' },
         { label: 'Categories', path: '/' },
         { label: 'Deals', path: '/' },
-        { label: 'Start Selling', path: route('auth.vendor-signup-page') },
+        { label: 'Start Selling', path: is_vendor ? route('filament.vendor.pages.dashboard') : route('auth.vendor-signup-page') },
     ];
 
     return (
@@ -21,7 +23,7 @@ const NavMenu = ({ vertical = false }: NavMenuProps) => {
             <ul className={`flex gap-6 ${vertical ? 'mt-2 flex-col space-y-2' : 'items-center'}`}>
                 {navItems.map((item) =>
                     item.label === 'Start Selling' ? (
-                        <Button key={item.label} component={Link} href={item.path} size="xs" variant="outline">
+                        <Button key={item.label} component="a" href={item.path} size="xs" variant="outline">
                             {item.label}
                         </Button>
                     ) : (
