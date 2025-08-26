@@ -52,7 +52,7 @@ class UserFactory extends Factory
         // Sync the role after creating the user
         return $this->state(fn (array $attributes) => $attributes)
             ->afterCreating(function (User $user) use ($role) {
-                $user->assignRole($role->value);
+                $user->syncRoles($role->value);
             });
     }
 
