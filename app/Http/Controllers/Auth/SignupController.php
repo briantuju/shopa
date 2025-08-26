@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Data\UserData;
 use App\Enums\Role;
 use App\Enums\SessionFlash;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\SignupRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -17,14 +17,12 @@ class SignupController extends Controller
     /**
      * @throws Throwable
      */
-    public function signup(SignupRequest $request)
+    public function signup(UserData $data)
     {
-        $data = $request->validated();
-
         // Create user within a transaction
         DB::beginTransaction();
 
-        $user = User::create($data);
+        $user = User::create($data->toArray());
 
         // Set the default user role
         $user->syncRoles(Role::USER->value);
