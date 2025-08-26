@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Enums\BusinessType;
+use App\Enums\Role;
+use App\Enums\VendorStatus;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -29,5 +31,23 @@ class VendorFactory extends Factory
             'store_name' => $store_name,
             'user_id' => User::first()?->id ?? User::factory()->create()->id,
         ];
+    }
+
+    /**
+     * Indicate that the model's status should be verified.
+     */
+    public function verified(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => VendorStatus::APPROVED->value,
+        ]);
+    }
+
+    public function configure(): static
+    {
+        // We want the VENDOR role to be assigned to the user
+        return $this->afterCreating(function (Vendor $vendor) {
+            $vendor->user->syncRoles(Role::VENDOR->value);
+        });
     }
 }

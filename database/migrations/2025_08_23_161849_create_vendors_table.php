@@ -42,6 +42,7 @@ return new class extends Migration
                 ->default(VendorStatus::PENDING->value);
 
             $table->foreignIdFor(User::class)
+                ->unique()
                 ->constrained()
                 ->cascadeOnDelete();
 

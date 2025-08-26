@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Role;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Vendor;
@@ -23,7 +24,7 @@ class VendorSeeder extends Seeder
                 ],
                 'vendor' => [
                     'business_name' => 'Nike Inc.',
-                    'business_type' => 'company',
+                    'business_type' => 'COMPANY',
                     'registration_number' => 'NIKE-12345',
                     'tax_id' => 'US-TAX-998877',
                     'address_line' => 'One Bowerman Drive',
@@ -35,7 +36,6 @@ class VendorSeeder extends Seeder
                     'store_description' => 'Global leader in sportswear and athletic shoes.',
                     'store_logo' => 'logos/nike_logo.png',
                     'store_banner' => 'logos/nike_logo.png',
-                    'status' => 'approved',
                 ],
                 'categories' => ['Sports & Outdoors', 'Footwear'],
             ],
@@ -47,7 +47,7 @@ class VendorSeeder extends Seeder
                 ],
                 'vendor' => [
                     'business_name' => 'Apple Inc.',
-                    'business_type' => 'company',
+                    'business_type' => 'COMPANY',
                     'registration_number' => 'APPLE-98765',
                     'tax_id' => 'US-TAX-112233',
                     'address_line' => 'One Apple Park Way',
@@ -59,7 +59,6 @@ class VendorSeeder extends Seeder
                     'store_description' => 'Premium electronics and gadgets by Apple.',
                     'store_logo' => 'logos/apple_logo.jpg',
                     'store_banner' => 'logos/apple_logo.jpg',
-                    'status' => 'approved',
                 ],
                 'categories' => ['Electronics'],
             ],
@@ -71,7 +70,7 @@ class VendorSeeder extends Seeder
                 ],
                 'vendor' => [
                     'business_name' => 'Zara',
-                    'business_type' => 'company',
+                    'business_type' => 'COMPANY',
                     'registration_number' => 'ZARA-67890',
                     'tax_id' => 'EU-TAX-445566',
                     'address_line' => 'Av. de la Diputación',
@@ -83,7 +82,6 @@ class VendorSeeder extends Seeder
                     'store_description' => 'Fashion and apparel retailer.',
                     'store_logo' => 'logos/zara_logo.png',
                     'store_banner' => 'logos/zara_logo.png',
-                    'status' => 'approved',
                 ],
                 'categories' => ['Apparel'],
             ],
@@ -95,7 +93,7 @@ class VendorSeeder extends Seeder
                 ],
                 'vendor' => [
                     'business_name' => 'Samsung Electronics',
-                    'business_type' => 'company',
+                    'business_type' => 'COMPANY',
                     'registration_number' => 'SAMSUNG-45678',
                     'tax_id' => 'KR-TAX-778899',
                     'address_line' => '129 Samsung-ro',
@@ -107,7 +105,6 @@ class VendorSeeder extends Seeder
                     'store_description' => 'Innovative electronics and home appliances.',
                     'store_logo' => 'logos/samsung_logo.png',
                     'store_banner' => 'logos/samsung_logo.png',
-                    'status' => 'approved',
                 ],
                 'categories' => ['Electronics', 'Home & Kitchen'],
             ],
@@ -119,7 +116,7 @@ class VendorSeeder extends Seeder
                 ],
                 'vendor' => [
                     'business_name' => 'Adidas Kenya',
-                    'business_type' => 'company',
+                    'business_type' => 'COMPANY',
                     'registration_number' => 'ADIDAS-11223',
                     'tax_id' => 'KE-TAX-334455',
                     'address_line' => 'ABC Towers',
@@ -131,7 +128,6 @@ class VendorSeeder extends Seeder
                     'store_description' => 'Premium athletic footwear and apparel.',
                     'store_logo' => 'logos/adidas_logo.png',
                     'store_banner' => 'logos/adidas_logo.png',
-                    'status' => 'approved',
                 ],
                 'categories' => ['Apparel', 'Footwear'],
             ],
@@ -139,7 +135,7 @@ class VendorSeeder extends Seeder
 
         foreach ($vendors as $data) {
             $user = User::firstOrCreate(['email' => $data['user']['email']], $data['user']);
-
+            $user->syncRoles(Role::VENDOR->value);
             $user->email_verified_at = now();
             $user->save();
 
