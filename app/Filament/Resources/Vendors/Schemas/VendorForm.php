@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Vendors\Schemas;
 use App\Enums\BusinessType;
 use App\Enums\Role;
 use App\Enums\VendorStatus;
+use App\Models\User;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -12,7 +13,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Illuminate\Database\Eloquent\Builder;
 
 class VendorForm
 {
@@ -28,7 +28,7 @@ class VendorForm
                             ->maxLength(255),
                         Select::make('business_type')
                             ->native(false)
-                            ->options(BusinessType::array())
+                            ->options(BusinessType::class)
                             ->required(),
                         TextInput::make('registration_number'),
                         TextInput::make('tax_id'),
@@ -79,16 +79,20 @@ class VendorForm
                             ->native(false)
                             ->preload()
                             ->searchable()
-                            ->options(VendorStatus::array())
+                            ->options(VendorStatus::class)
                             ->default(VendorStatus::PENDING->value),
                         Select::make('user_id')
-                            ->relationship(
-                                name: 'user',
-                                titleAttribute: 'name',
-                                // Spatie adds a role() method to the query builder
-                                // so we can filter users to only show users with role USER
-                                modifyQueryUsing: fn (Builder $query) => $query->role(Role::USER->value))
-                            ->native(false)
+                            ->relationship(name: 'user', titleAttribute: 'name')
+                            ->disabled()
+                            ->getOptionLabelFromRecordUsing(function (User $user): string {
+                                $roles = $user->getRoleNames()
+                                    ->map(fn ($role) => strtolower($role))
+                                    ->map(fn ($role) => ucfirst($role))
+                                    ->implode(', ');
+                                $roles_str = empty($roles) ? '' : "($roles)";
+
+                                return "$user->name $roles_str";
+                            })
                             ->createOptionForm([
                                 Grid::make()
                                     ->components([
@@ -109,8 +113,6 @@ class VendorForm
                                     ])
                                     ->columns(['base' => 1, 'md' => 2]),
                             ])
-                            ->preload()
-                            ->searchable()
                             ->required(),
                     ]),
             ]);

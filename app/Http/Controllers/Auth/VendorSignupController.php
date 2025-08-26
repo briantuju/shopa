@@ -21,7 +21,7 @@ class VendorSignupController extends Controller
     {
         return Inertia::render('auth/Signup/VendorSignupPage')
             ->with([
-                'business_types' => BusinessType::values(),
+                'business_types' => BusinessType::cases(),
             ]);
     }
 

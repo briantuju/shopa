@@ -8,7 +8,7 @@ enum BusinessType: string
 {
     use EnumToArray;
 
-    case INDIVIDUAL = 'individual';
+    case INDIVIDUAL = 'INDIVIDUAL';
 
-    case COMPANY = 'company';
+    case COMPANY = 'COMPANY';
 }

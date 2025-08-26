@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\BusinessType;
+use App\Enums\VendorStatus;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Database\Factories\VendorFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,6 +35,14 @@ class Vendor extends Model
         'store_banner',
         'user_id',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'business_type' => BusinessType::class,
+            'state' => VendorStatus::class,
+        ];
+    }
 
     /** Get the user tied to this Vendor */
     public function user(): BelongsTo

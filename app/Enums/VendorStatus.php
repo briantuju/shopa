@@ -8,11 +8,11 @@ enum VendorStatus: string
 {
     use EnumToArray;
 
-    case PENDING = 'pending';
+    case PENDING = 'PENDING';
 
-    case APPROVED = 'approved';
+    case APPROVED = 'APPROVED';
 
-    case REJECTED = 'rejected';
+    case REJECTED = 'REJECTED';
 
-    case SUSPENDED = 'suspended';
+    case SUSPENDED = 'SUSPENDED';
 }

@@ -34,7 +34,7 @@ class VendorSignupRequest extends FormRequest
 
             // Business details
             'business_name' => ['required', 'string', 'max:200'],
-            'business_type' => ['required', 'string', Rule::in(BusinessType::values())],
+            'business_type' => ['required', 'string', Rule::in(BusinessType::cases())],
             'store_name' => ['required', 'string', 'max:200'],
             'address_line' => ['required', 'string', 'max:200'],
         ];
