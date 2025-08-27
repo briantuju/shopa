@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources\Packages\Pages;
 
+use App\Actions\AdminPanel\CreatePackagePrice;
 use App\Actions\AdminPanel\UpdatePackagePrice;
 use App\Enums\PackageCycle;
 use App\Filament\Resources\Packages\PackageResource;
 use App\Models\PackagePrice;
 use BackedEnum;
 use Exception;
+use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
@@ -60,6 +62,7 @@ class ManagePackagePrices extends ManageRelatedRecords
                 Toggle::make('on_promotion')
                     ->live(),
                 TextEntry::make('info')
+                    ->visibleOn('edit')
                     ->columnSpanFull()
                     ->state(
                         fn (): HtmlString => new HtmlString(
@@ -123,7 +126,13 @@ class ManagePackagePrices extends ManageRelatedRecords
                 //
             ])
             ->headerActions([
-                CreateAction::make(),
+                CreateAction::make()
+                    ->using(
+                        fn (Action $action, array $data) => CreatePackagePrice::run($action, array_merge($data, [
+                            // $this->record refers to the package and is always available at this point
+                            'package_id' => $this->record->id,
+                        ]))
+                    ),
                 AssociateAction::make(),
             ])
             ->recordActions([
