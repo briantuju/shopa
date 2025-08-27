@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('package_prices', function (Blueprint $table) {
             $table->id();
 
-            $table->enum('cycle', PackageCycle::array());
+            $table->enum('billing_cycle', PackageCycle::array());
             $table->decimal('price', 8, 2);
             $table->boolean('is_active')->default(true);
             $table->boolean('on_promotion')->default(false);
@@ -27,8 +27,8 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
-            // enforce uniqueness: one cycle per package
-            $table->unique(['package_id', 'cycle']);
+            // enforce uniqueness: one billing cycle per package
+            $table->unique(['package_id', 'billing_cycle']);
 
             $table->timestamps();
         });

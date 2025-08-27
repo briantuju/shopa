@@ -14,7 +14,7 @@ class PackagePrice extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cycle',
+        'billing_cycle',
         'price',
         'is_active',
         'on_promotion',
@@ -28,7 +28,7 @@ class PackagePrice extends Model
         return [
             'is_active' => 'bool',
             'on_promotion' => 'bool',
-            'cycle' => PackageCycle::class,
+            'billing_cycle' => PackageCycle::class,
         ];
     }
 

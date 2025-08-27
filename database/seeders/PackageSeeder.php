@@ -25,7 +25,7 @@ class PackageSeeder extends Seeder
         );
         /* Since we need to send invoices (monthly), the free plan also gets a price */
         PackagePrice::firstOrCreate(
-            ['package_id' => $free->id, 'cycle' => PackageCycle::MONTHLY->value],
+            ['package_id' => $free->id, 'billing_cycle' => PackageCycle::MONTHLY->value],
             [
                 'price' => 0,
                 'is_active' => true,
@@ -41,14 +41,14 @@ class PackageSeeder extends Seeder
             ]
         );
         PackagePrice::firstOrCreate(
-            ['package_id' => $starter->id, 'cycle' => PackageCycle::MONTHLY->value],
+            ['package_id' => $starter->id, 'billing_cycle' => PackageCycle::MONTHLY->value],
             [
                 'price' => 500,
                 'is_active' => true,
             ]
         );
         PackagePrice::firstOrCreate(
-            ['package_id' => $starter->id, 'cycle' => PackageCycle::YEARLY->value],
+            ['package_id' => $starter->id, 'billing_cycle' => PackageCycle::YEARLY->value],
             [
                 'price' => 500 * 12,
                 'is_active' => true,
@@ -64,14 +64,14 @@ class PackageSeeder extends Seeder
             ]
         );
         PackagePrice::firstOrCreate(
-            ['package_id' => $premium->id, 'cycle' => PackageCycle::MONTHLY->value],
+            ['package_id' => $premium->id, 'billing_cycle' => PackageCycle::MONTHLY->value],
             [
                 'price' => 1500,
                 'is_active' => true,
             ]
         );
         PackagePrice::firstOrCreate(
-            ['package_id' => $premium->id, 'cycle' => PackageCycle::YEARLY->value],
+            ['package_id' => $premium->id, 'billing_cycle' => PackageCycle::YEARLY->value],
             [
                 // monthly plan price * 10 months since we're running a promotion for this package
                 'price' => 1500 * 10,
@@ -92,14 +92,14 @@ class PackageSeeder extends Seeder
             ]
         );
         PackagePrice::firstOrCreate(
-            ['package_id' => $ultimate->id, 'cycle' => PackageCycle::MONTHLY->value],
+            ['package_id' => $ultimate->id, 'billing_cycle' => PackageCycle::MONTHLY->value],
             [
                 'price' => 2500,
                 'is_active' => true,
             ]
         );
         PackagePrice::firstOrCreate(
-            ['package_id' => $ultimate->id, 'cycle' => PackageCycle::YEARLY->value],
+            ['package_id' => $ultimate->id, 'billing_cycle' => PackageCycle::YEARLY->value],
             [
                 // monthly plan price * 10 months since we're running a promotion for this package
                 'price' => 2500 * 10,

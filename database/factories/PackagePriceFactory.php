@@ -20,7 +20,7 @@ class PackagePriceFactory extends Factory
     public function definition(): array
     {
         return [
-            'cycle' => fake()->randomElement(PackageCycle::array()),
+            'billing_cycle' => fake()->randomElement(PackageCycle::array()),
             'price' => fake()->randomFloat(0, 500, 5000),
             'is_active' => true,
             'on_promotion' => false,

@@ -62,4 +62,10 @@ class Package extends Model
     {
         return $this->hasMany(PackageEntitlement::class);
     }
+
+    /** Get the subscriptions for this package */
+    public function vendorSubscriptions(): HasMany
+    {
+        return $this->hasMany(VendorSubscription::class);
+    }
 }

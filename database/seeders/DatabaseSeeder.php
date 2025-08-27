@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
+        // Please make sure these seeder follow the order in which they are listed here
         $this->call([
             CategorySeeder::class,
             BrandSeeder::class,
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
             AttributeValueSeeder::class, // Call after AttributeSeeder
             VendorSeeder::class,
             PackageSeeder::class,
+            VendorSubscriptionSeeder::class,
         ]);
     }
 }
