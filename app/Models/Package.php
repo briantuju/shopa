@@ -52,7 +52,7 @@ class Package extends Model
     }
 
     /** Get the price options for this package. */
-    public function packagePrices(): HasMany
+    public function prices(): HasMany
     {
         return $this->hasMany(PackagePrice::class);
     }
@@ -64,7 +64,7 @@ class Package extends Model
     }
 
     /** Get the subscriptions for this package */
-    public function vendorSubscriptions(): HasMany
+    public function subscriptions(): HasMany
     {
         return $this->hasMany(VendorSubscription::class);
     }

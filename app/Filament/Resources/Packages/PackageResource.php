@@ -6,6 +6,7 @@ use App\Filament\Resources\Packages\Pages\CreatePackage;
 use App\Filament\Resources\Packages\Pages\EditPackage;
 use App\Filament\Resources\Packages\Pages\ListPackages;
 use App\Filament\Resources\Packages\Pages\ManagePackageEntitlements;
+use App\Filament\Resources\Packages\Pages\ManagePackagePrices;
 use App\Filament\Resources\Packages\Schemas\PackageForm;
 use App\Filament\Resources\Packages\Tables\PackagesTable;
 use App\Models\Package;
@@ -55,6 +56,7 @@ class PackageResource extends Resource
     {
         return $page->generateNavigationItems([
             ManagePackageEntitlements::class,
+            ManagePackagePrices::class,
         ]);
     }
 
@@ -65,6 +67,7 @@ class PackageResource extends Resource
             'create' => CreatePackage::route('/create'),
             'edit' => EditPackage::route('/{record}/edit'),
             'entitlements' => ManagePackageEntitlements::route('/{record}/entitlements'),
+            'prices' => ManagePackagePrices::route('/{record}/prices'),
         ];
     }
 }
