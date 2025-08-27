@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             AttributeSeeder::class,
             AttributeValueSeeder::class, // Call after AttributeSeeder
             VendorSeeder::class,
+            PackageSeeder::class,
         ]);
     }
 }
