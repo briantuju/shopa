@@ -58,7 +58,7 @@ class Package extends Model
     }
 
     /** Get the entitlements for this package. */
-    public function packageEntitlements(): HasMany
+    public function entitlements(): HasMany
     {
         return $this->hasMany(PackageEntitlement::class);
     }

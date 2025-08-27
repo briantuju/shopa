@@ -2,12 +2,15 @@
 
 namespace App\Filament\Vendor\Resources\Products\Tables;
 
+use App\Filament\Vendor\Resources\Products\Pages\CreateProduct;
 use Exception;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
@@ -52,6 +55,16 @@ class ProductsTable
             ->groups([
                 'brand.name',
                 'category.name',
+            ])
+            ->emptyStateHeading("We couldn't find any products")
+            ->emptyStateDescription('You can add a new product by clicking the button below.')
+            ->emptyStateIcon(Heroicon::FolderOpen)
+            ->emptyStateActions([
+                Action::make('create')
+                    ->label('Add now')
+                    ->url(CreateProduct::getUrl())
+                    ->icon('heroicon-m-plus')
+                    ->button(),
             ])
             ->filters([
                 TrashedFilter::make(),

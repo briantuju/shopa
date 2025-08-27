@@ -38,7 +38,9 @@ class PackagesTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([])
+            ->filters([
+                //
+            ])
             ->recordActions([
                 EditAction::make(),
             ])
