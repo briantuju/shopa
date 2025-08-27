@@ -24,9 +24,11 @@ class ManagePackageEntitlements extends ManageRelatedRecords
 {
     protected static string $resource = PackageResource::class;
 
+    protected static ?string $navigationLabel = 'What\'s included';
+
     protected static string $relationship = 'entitlements';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTrophy;
 
     /**
      * @throws Exception

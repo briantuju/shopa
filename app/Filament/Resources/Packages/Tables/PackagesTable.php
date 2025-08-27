@@ -2,7 +2,10 @@
 
 namespace App\Filament\Resources\Packages\Tables;
 
+use App\Filament\Resources\Packages\Pages\ManagePackageEntitlements;
+use App\Models\Package;
 use Exception;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -43,6 +46,10 @@ class PackagesTable
             ])
             ->recordActions([
                 EditAction::make(),
+                Action::make('Options')
+                    ->url(fn (Package $record) => ManagePackageEntitlements::getUrl([
+                        'record' => $record->id,
+                    ])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
