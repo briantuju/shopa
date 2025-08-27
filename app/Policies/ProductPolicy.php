@@ -22,7 +22,7 @@ class ProductPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can(Permission::VIEW->value.' '.Resource::PRODUCT->value);
+        return $user->can(Permission::VIEW->value.' '.Resource::Product->value);
     }
 
     /**
@@ -30,7 +30,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product): bool
     {
-        return $user->can(Permission::VIEW->value.' '.Resource::PRODUCT->value)
+        return $user->can(Permission::VIEW->value.' '.Resource::Product->value)
             && $product->user_id === $user->id;
     }
 
@@ -39,7 +39,7 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can(Permission::CREATE->value.' '.Resource::PRODUCT->value);
+        return $user->can(Permission::CREATE->value.' '.Resource::Product->value);
     }
 
     /**
@@ -47,7 +47,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return $user->can(Permission::UPDATE->value.' '.Resource::PRODUCT->value)
+        return $user->can(Permission::UPDATE->value.' '.Resource::Product->value)
             && $product->user_id === $user->id;
     }
 
@@ -56,7 +56,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->can(Permission::DELETE->value.' '.Resource::PRODUCT->value)
+        return $user->can(Permission::DELETE->value.' '.Resource::Product->value)
             && $product->user_id === $user->id;
     }
 
@@ -65,7 +65,7 @@ class ProductPolicy
      */
     public function restore(User $user, Product $product): bool
     {
-        return $user->can(Permission::CREATE->value.' '.Resource::PRODUCT->value)
+        return $user->can(Permission::CREATE->value.' '.Resource::Product->value)
             && $product->user_id === $user->id;
     }
 
@@ -74,7 +74,7 @@ class ProductPolicy
      */
     public function forceDelete(User $user, Product $product): bool
     {
-        return $user->can(Permission::CREATE->value.' '.Resource::PRODUCT->value)
+        return $user->can(Permission::CREATE->value.' '.Resource::Product->value)
             && $product->user_id === $user->id;
     }
 }

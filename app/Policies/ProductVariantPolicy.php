@@ -34,7 +34,7 @@ class ProductVariantPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can(Permission::VIEW->value.' '.Resource::PRODUCT_VARIANT->value);
+        return $user->can(Permission::VIEW->value.' '.Resource::Product_Variant->value);
     }
 
     /**
@@ -42,7 +42,7 @@ class ProductVariantPolicy
      */
     public function view(User $user, ProductVariant $productVariant): bool
     {
-        return $user->can(Permission::VIEW->value.' '.Resource::PRODUCT_VARIANT->value)
+        return $user->can(Permission::VIEW->value.' '.Resource::Product_Variant->value)
             && $productVariant->product->user_id === $user->id;
     }
 
@@ -51,7 +51,7 @@ class ProductVariantPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can(Permission::CREATE->value.' '.Resource::PRODUCT_VARIANT->value);
+        return $user->can(Permission::CREATE->value.' '.Resource::Product_Variant->value);
     }
 
     /**
@@ -59,7 +59,7 @@ class ProductVariantPolicy
      */
     public function update(User $user, ProductVariant $productVariant): bool
     {
-        return $user->can(Permission::UPDATE->value.' '.Resource::PRODUCT_VARIANT->value)
+        return $user->can(Permission::UPDATE->value.' '.Resource::Product_Variant->value)
             && $productVariant->product->user_id === $user->id;
     }
 
@@ -68,7 +68,7 @@ class ProductVariantPolicy
      */
     public function delete(User $user, ProductVariant $productVariant): bool
     {
-        return $user->can(Permission::DELETE->value.' '.Resource::PRODUCT_VARIANT->value)
+        return $user->can(Permission::DELETE->value.' '.Resource::Product_Variant->value)
             && $productVariant->product->user_id === $user->id;
     }
 
@@ -77,7 +77,7 @@ class ProductVariantPolicy
      */
     public function restore(User $user, ProductVariant $productVariant): bool
     {
-        return $user->can(Permission::CREATE->value.' '.Resource::PRODUCT_VARIANT->value)
+        return $user->can(Permission::CREATE->value.' '.Resource::Product_Variant->value)
             && $productVariant->product->user_id === $user->id;
     }
 
@@ -86,7 +86,7 @@ class ProductVariantPolicy
      */
     public function forceDelete(User $user, ProductVariant $productVariant): bool
     {
-        return $user->can(Permission::CREATE->value.' '.Resource::PRODUCT_VARIANT->value)
+        return $user->can(Permission::CREATE->value.' '.Resource::Product_Variant->value)
             && $productVariant->product->user_id === $user->id;
     }
 }

@@ -2,13 +2,6 @@
 
 namespace App\Enums;
 
-use App\Models\Attribute;
-use App\Models\AttributeValue;
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\ProductVariant;
-use App\Models\User;
 use App\Traits\EnumToArray;
 
 enum Resource: string
@@ -16,22 +9,22 @@ enum Resource: string
     use EnumToArray;
 
     /*
-     * This is a list of models that are used in the system
+     * This is a hard coded list of models that are used in the system
      * */
 
-    case ATTRIBUTE = Attribute::class;
+    case Attribute = 'Attribute';
 
-    case ATTRIBUTE_VALUE = AttributeValue::class;
+    case Attribute_Value = 'AttributeValue';
 
-    case BRAND = Brand::class;
+    case Brand = 'Brand';
 
-    case CATEGORY = Category::class;
+    case Category = 'Category';
 
-    case PRODUCT = Product::class;
+    case Product = 'Product';
 
-    case PRODUCT_VARIANT = ProductVariant::class;
+    case Product_Variant = 'ProductVariant';
 
-    case USER = User::class;
+    case User = 'User';
 
     public function label(): string
     {
