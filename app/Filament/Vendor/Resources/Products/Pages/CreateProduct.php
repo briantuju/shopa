@@ -19,7 +19,7 @@ class CreateProduct extends CreateRecord
         unset($data['slug']);
 
         // set the user to current user
-        $data['user_id'] = auth()->id();
+        $data['vendor_id'] = auth()->user()->vendor->id;
 
         return $data;
     }

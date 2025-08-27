@@ -29,7 +29,7 @@ class Product extends Model
         'description',
         'category_id',
         'brand_id',
-        'user_id',
+        'vendor_id',
     ];
 
     /** Get the category that this Product belongs to */
@@ -44,10 +44,10 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    /** Get the user that created this Product */
-    public function user(): BelongsTo
+    /** Get the vendor that created this Product */
+    public function vendor(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Vendor::class);
     }
 
     /** Get the variants for this Product */

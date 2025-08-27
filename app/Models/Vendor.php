@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Vendor extends Model
@@ -55,6 +56,12 @@ class Vendor extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'category_vendor');
+    }
+
+    /** Get the products for this Vendor */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
     }
 
     /** Get the subscription tied to this Vendor */

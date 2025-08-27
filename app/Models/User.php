@@ -90,7 +90,9 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         if ($panel->getId() === 'admin') {
             return $this->hasVerifiedEmail() && $this->hasExactRoles(Role::ADMIN->value);
         } elseif ($panel->getId() === 'vendor') {
-            return $this->hasVerifiedEmail() && $this->hasExactRoles(Role::VENDOR->value);
+            return $this->hasVerifiedEmail() &&
+                $this->hasExactRoles(Role::VENDOR->value) &&
+                $this->vendor()->exists();
         }
 
         return true;

@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\User;
+use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -31,7 +31,7 @@ class ProductFactory extends Factory
 
             'brand_id' => Brand::inRandomOrder()->first()?->id ?? null,
             'category_id' => Category::inRandomOrder()->first()?->id ?? null,
-            'user_id' => User::inRandomOrder()->first()?->id ?? User::factory()->create()->id,
+            'vendor_id' => Vendor::inRandomOrder()->first()?->id ?? Vendor::factory()->create()->id,
         ];
     }
 }

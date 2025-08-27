@@ -31,7 +31,7 @@ class ProductPolicy
     public function view(User $user, Product $product): bool
     {
         return $user->can(Permission::VIEW->value.' '.Resource::Product->value)
-            && $product->user_id === $user->id;
+            && $product->vendor_id === $user->vendor->id;
     }
 
     /**
@@ -48,7 +48,7 @@ class ProductPolicy
     public function update(User $user, Product $product): bool
     {
         return $user->can(Permission::UPDATE->value.' '.Resource::Product->value)
-            && $product->user_id === $user->id;
+            && $product->vendor_id === $user->vendor->id;
     }
 
     /**
@@ -57,7 +57,7 @@ class ProductPolicy
     public function delete(User $user, Product $product): bool
     {
         return $user->can(Permission::DELETE->value.' '.Resource::Product->value)
-            && $product->user_id === $user->id;
+            && $product->vendor_id === $user->vendor->id;
     }
 
     /**
@@ -66,7 +66,7 @@ class ProductPolicy
     public function restore(User $user, Product $product): bool
     {
         return $user->can(Permission::CREATE->value.' '.Resource::Product->value)
-            && $product->user_id === $user->id;
+            && $product->vendor_id === $user->vendor->id;
     }
 
     /**
@@ -75,6 +75,6 @@ class ProductPolicy
     public function forceDelete(User $user, Product $product): bool
     {
         return $user->can(Permission::CREATE->value.' '.Resource::Product->value)
-            && $product->user_id === $user->id;
+            && $product->vendor_id === $user->vendor->id;
     }
 }
