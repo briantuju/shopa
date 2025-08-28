@@ -1,3 +1,5 @@
+@php use App\Filament\Vendor\Pages\Subscriptions\CreateVendorSubscriptionPage; @endphp
+
 <x-filament-panels::page>
     @if ($subscription)
         <div class="space-y-4">
@@ -35,7 +37,7 @@
     @else
         <div class="text-center py-10 flex flex-col gap-8 items-center">
             <p class="text-gray-400">You don’t have an active subscription.</p>
-            <x-filament::button tag="a" href="">
+            <x-filament::button tag="a" href="{{ CreateVendorSubscriptionPage::getUrl() }}">
                 Choose a Plan
             </x-filament::button>
         </div>

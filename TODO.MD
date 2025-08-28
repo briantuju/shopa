@@ -1,1 +1,2 @@
 - [ ] Update the attributes to show on the Product edit page
+- [ ] Add a label and description to package entitlements for better UX

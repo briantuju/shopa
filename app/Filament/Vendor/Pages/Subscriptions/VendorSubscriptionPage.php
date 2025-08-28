@@ -2,6 +2,7 @@
 
 namespace App\Filament\Vendor\Pages\Subscriptions;
 
+use App\Models\Vendor;
 use App\Models\VendorSubscription;
 use BackedEnum;
 use Filament\Actions\Action;
@@ -21,17 +22,19 @@ class VendorSubscriptionPage extends Page
 
     protected string $view = 'filament.vendor.pages.subscriptions.vendor-subscription-page';
 
+    public Vendor $vendor;
+
     public ?VendorSubscription $subscription = null;
 
     public function mount(): void
     {
-        $vendor = auth()->user()->vendor;
-        $this->subscription = $vendor->subscription;
+        $this->vendor = auth()->user()->vendor;
+        $this->subscription = $this->vendor->subscription;
     }
 
     protected function getHeaderActions(): array
     {
-        return [
+        return $this->subscription ? [
             Action::make('upgrade')
                 ->label('Upgrade / Change Plan')
                 ->icon('heroicon-o-arrow-up-right')
@@ -43,6 +46,6 @@ class VendorSubscriptionPage extends Page
                 ->color('danger')
                 ->requiresConfirmation()
                 ->action(fn () => $this->js("alert('Not implemented')")),
-        ];
+        ] : [];
     }
 }
