@@ -10,20 +10,16 @@ use App\Filament\Resources\Packages\Pages\ManagePackagePrices;
 use App\Filament\Resources\Packages\Schemas\PackageForm;
 use App\Filament\Resources\Packages\Tables\PackagesTable;
 use App\Models\Package;
-use BackedEnum;
 use Exception;
 use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
 class PackageResource extends Resource
 {
     protected static ?string $model = Package::class;
-
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::Trophy;
 
     protected static string|UnitEnum|null $navigationGroup = 'Sales';
 

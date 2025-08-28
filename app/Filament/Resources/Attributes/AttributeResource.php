@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Attributes;
 
 use App\Filament\Resources\Attributes\Pages\ManageAttributes;
 use App\Models\Attribute;
-use BackedEnum;
 use Exception;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -16,16 +15,16 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class AttributeResource extends Resource
 {
     protected static ?string $model = Attribute::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|UnitEnum|null $navigationGroup = 'Catalog';
 
     /**
      * @throws Exception

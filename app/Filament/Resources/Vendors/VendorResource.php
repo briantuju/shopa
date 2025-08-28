@@ -8,18 +8,17 @@ use App\Filament\Resources\Vendors\Pages\ListVendors;
 use App\Filament\Resources\Vendors\Schemas\VendorForm;
 use App\Filament\Resources\Vendors\Tables\VendorsTable;
 use App\Models\Vendor;
-use BackedEnum;
 use Exception;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class VendorResource extends Resource
 {
     protected static ?string $model = Vendor::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::UserGroup;
+    protected static string|UnitEnum|null $navigationGroup = 'Users';
 
     /**
      * @throws Exception

@@ -6,10 +6,12 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
 use Filament\View\PanelsRenderHook;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
@@ -42,6 +44,20 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('Catalog')
+                    ->icon(Heroicon::ServerStack),
+                NavigationGroup::make()
+                    ->label('Sales')
+                    ->icon(Heroicon::Trophy),
+                NavigationGroup::make()
+                    ->label('Users')
+                    ->icon(Heroicon::UserGroup),
+                NavigationGroup::make()
+                    ->label('Settings')
+                    ->icon(Heroicon::Cog),
             ])
             ->middleware([
                 EncryptCookies::class,
