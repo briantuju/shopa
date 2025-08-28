@@ -3,6 +3,7 @@
 namespace App\Filament\Vendor\Pages\Subscriptions;
 
 use App\Models\Package;
+use App\Models\PackagePrice;
 use App\Models\VendorSubscription;
 use Filament\Pages\Page;
 
@@ -18,6 +19,10 @@ class CreateVendorSubscriptionPage extends Page
 
     public ?VendorSubscription $subscription;
 
+    public PackagePrice $packagePrice;
+
+    public Package $package;
+
     /** @var array<Package> */
     public $packages;
 
@@ -31,8 +36,11 @@ class CreateVendorSubscriptionPage extends Page
             ->get();
     }
 
-    public function subscribe(int $price_id)
+    public function subscribe(int $priceId)
     {
-        $this->js("alert('Not implemented $price_id')");
+        $this->packagePrice = PackagePrice::find($priceId);
+        $this->package = $this->packagePrice->package;
+
+        $this->js("alert('Package: {$this->package->name}. Price: {$this->packagePrice->price}')");
     }
 }

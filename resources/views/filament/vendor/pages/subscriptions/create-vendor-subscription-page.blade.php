@@ -1,7 +1,7 @@
 <x-filament-panels::page>
     <x-slot name="heading">Choose a Plan</x-slot>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         @foreach ($packages as $package)
             <x-filament::card>
                 <h2 class="text-xl font-semibold">{{ $package->name }}</h2>
@@ -24,28 +24,17 @@
                     @endforelse
                 </ul>
 
-                @if ($package->prices->count() === 1)
-                    <p>
-                        {{ $package->prices->first()->price }}
-                        {{ $package->prices->first()->billing_cycle }}
-                        <x-filament::button variant="primary"
-                                            wire:click="subscribe({{ $package->prices->first()->id }})">
-                            Subscribe
-                        </x-filament::button>
-                    </p>
-                @else
-                    <div class="flex flex-col gap-8">
-                        @foreach ($package->prices as $price)
-                            <p>
-                                {{ $price->price }}
-                                {{ $price->billing_cycle }}
-                                <x-filament::button variant="primary" wire:click="subscribe({{ $price->id }})">
-                                    Subscribe
-                                </x-filament::button>
-                            </p>
-                        @endforeach
-                    </div>
-                @endif
+                <livewire:plan-selector
+                    {{-- Listen to the subscribe event --}}
+                    @subscribe="subscribe($event.detail.priceId)"
+                    :prices="$package->prices->map(fn($p) => [
+                            'id' => $p->id,
+                            'billing_cycle' => $p->billing_cycle,
+                            'price' => $p->price,
+                            'description' => $p->description ?? '',
+                        ])->toArray()"
+                    :key="$package->id"
+                />
             </x-filament::card>
         @endforeach
     </div>
