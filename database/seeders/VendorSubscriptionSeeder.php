@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\PackageCycle;
 use App\Enums\PaymentGateway;
+use App\Enums\VendorSubscriptionChange;
 use App\Enums\VendorSubscriptionStatus;
 use App\Models\Package;
 use App\Models\Vendor;
@@ -43,6 +44,17 @@ class VendorSubscriptionSeeder extends Seeder
                 'notes' => 'Seeded subscription for testing',
                 'vendor_id' => $vendor->id,
                 'package_id' => $package->id,
+            ]);
+        }
+
+        // Create a `CREATED` subscription history for each subscription
+        foreach (VendorSubscription::all() as $subscription) {
+            $subscription->history()->create([
+                'change_type' => VendorSubscriptionChange::CREATED->value,
+                'effective_at' => now(),
+                'billing_cycle' => $subscription->billing_cycle,
+                'notes' => 'Created automatically',
+                'vendor_id' => $subscription->vendor_id,
             ]);
         }
     }
