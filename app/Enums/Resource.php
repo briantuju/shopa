@@ -20,11 +20,25 @@ enum Resource: string
 
     case Category = 'Category';
 
+    case Package = 'Package';
+
+    case PackageEntitlement = 'PackageEntitlement';
+
+    case PackagePrice = 'PackagePrice';
+
     case Product = 'Product';
 
-    case Product_Variant = 'ProductVariant';
+    case ProductVariant = 'ProductVariant';
 
     case User = 'User';
+
+    case Vendor = 'Vendor';
+
+    case VendorEntitlement = 'VendorEntitlement';
+
+    case VendorSubscription = 'VendorSubscription';
+
+    case VendorSubscriptionHistory = 'VendorSubscriptionHistory';
 
     public function label(): string
     {

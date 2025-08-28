@@ -60,7 +60,11 @@ class RolePermissions
 
             match ($roleEnum->value) {
                 Role::VENDOR->value => $role->syncPermissions(
-                    self::forResources([Resource::Product, Resource::Product_Variant])
+                    self::forResources([
+                        Resource::Product,
+                        Resource::ProductVariant,
+                        Resource::VendorSubscription,
+                    ])
                 ),
 
                 /*Role::USER => $role->syncPermissions(
