@@ -54,6 +54,7 @@ class VendorPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->viteTheme('resources/css/filament/vendor/theme.css');
     }
 }

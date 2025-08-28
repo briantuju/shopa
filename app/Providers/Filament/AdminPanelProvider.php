@@ -58,6 +58,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->databaseNotifications()
-            ->renderHook(PanelsRenderHook::BODY_END, fn (): View => view('filament.admin-panel-hook'));
+            ->renderHook(PanelsRenderHook::BODY_END, fn (): View => view('filament.admin-panel-hook'))
+            ->viteTheme('resources/css/filament/admin/theme.css');
     }
 }
