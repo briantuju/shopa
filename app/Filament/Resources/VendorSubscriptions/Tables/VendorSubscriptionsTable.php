@@ -48,19 +48,24 @@ class VendorSubscriptionsTable
                 TextColumn::make('payment_gateway'),
                 TextColumn::make('started_at')
                     ->dateTime('M d, Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('ends_at')
                     ->dateTime('M d, Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('cancelled_at')
                     ->dateTime('M d, Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('trial_ends_at')
                     ->dateTime('M d, Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('renewal_at')
                     ->dateTime('M d, Y H:i')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('last_payment_at')
                     ->dateTime('y-m-d')
                     ->sortable()
