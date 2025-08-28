@@ -62,7 +62,7 @@ class VendorSubscription extends Model
     }
 
     /** Get the vendor entitlements tied to this subscription */
-    public function vendorEntitlements(): HasMany
+    public function entitlements(): HasMany
     {
         return $this->hasMany(VendorEntitlement::class);
     }

@@ -65,7 +65,7 @@ class Vendor extends Model
     }
 
     /** Get the subscription tied to this Vendor */
-    public function vendorSubscription(): HasOne
+    public function subscription(): HasOne
     {
         return $this->hasOne(VendorSubscription::class);
     }
